@@ -38,7 +38,8 @@ void Game::drawing(){
     SDL_RenderClear(this->ext.renderer);
 
     // Do Drawing
-    this->drawing_snake();
+    std::thread drawer_snake(&Game::drawing_snake, this);
+    drawer_snake.join();
 
     // Present all.
     SDL_RenderPresent(this->ext.renderer);
