@@ -853,4 +853,5 @@ CMakeFiles/sdl3-snake.dir/src/main.cpp.o: \
   /opt/homebrew/include/SDL3/SDL_timer.h \
   /opt/homebrew/include/SDL3/SDL_tray.h \
   /opt/homebrew/include/SDL3/SDL_version.h \
-  /opt/homebrew/include/SDL3/SDL_oldnames.h
+  /opt/homebrew/include/SDL3/SDL_oldnames.h \
+  /Users/oli/Documents/code/sdl3-snake/src/../include/game.h

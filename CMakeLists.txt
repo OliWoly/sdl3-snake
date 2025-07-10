@@ -7,7 +7,7 @@ project(sdl3-snake VERSION 1.0)
 set(CMAKE_PREFIX_PATH "/opt/homebrew")
 find_package(SDL3 REQUIRED)
 
-add_executable(sdl3-snake src/main.cpp src/game.cpp)
+add_executable(sdl3-snake src/main.cpp src/game.cpp src/player.cpp)
 
 # Include SDL3 headers
 target_include_directories(sdl3-snake PUBLIC

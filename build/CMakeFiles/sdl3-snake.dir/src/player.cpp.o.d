@@ -1,5 +1,5 @@
-CMakeFiles/sdl3-snake.dir/src/game.cpp.o: \
-  /Users/oli/Documents/code/sdl3-snake/src/game.cpp \
+CMakeFiles/sdl3-snake.dir/src/player.cpp.o: \
+  /Users/oli/Documents/code/sdl3-snake/src/player.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \
@@ -793,7 +793,7 @@ CMakeFiles/sdl3-snake.dir/src/game.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/stack.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/unistd.h \
-  /Users/oli/Documents/code/sdl3-snake/src/../include/game.h \
+  /Users/oli/Documents/code/sdl3-snake/include/player.h \
   /opt/homebrew/include/SDL3/SDL.h \
   /opt/homebrew/include/SDL3/SDL_stdinc.h \
   /opt/homebrew/include/SDL3/SDL_platform_defines.h \
@@ -854,4 +854,6 @@ CMakeFiles/sdl3-snake.dir/src/game.cpp.o: \
   /opt/homebrew/include/SDL3/SDL_timer.h \
   /opt/homebrew/include/SDL3/SDL_tray.h \
   /opt/homebrew/include/SDL3/SDL_version.h \
-  /opt/homebrew/include/SDL3/SDL_oldnames.h
+  /opt/homebrew/include/SDL3/SDL_oldnames.h \
+  /Users/oli/Documents/code/sdl3-snake/include/position.h \
+  /Users/oli/Documents/code/sdl3-snake/include/colour.h
