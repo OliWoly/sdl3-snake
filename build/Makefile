@@ -129,6 +129,30 @@ sdl3-snake/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/build
 .PHONY : sdl3-snake/fast
 
+src/entity.o: src/entity.cpp.o
+.PHONY : src/entity.o
+
+# target to build an object file
+src/entity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/entity.cpp.o
+.PHONY : src/entity.cpp.o
+
+src/entity.i: src/entity.cpp.i
+.PHONY : src/entity.i
+
+# target to preprocess a source file
+src/entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/entity.cpp.i
+.PHONY : src/entity.cpp.i
+
+src/entity.s: src/entity.cpp.s
+.PHONY : src/entity.s
+
+# target to generate assembly for a file
+src/entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/entity.cpp.s
+.PHONY : src/entity.cpp.s
+
 src/game.o: src/game.cpp.o
 .PHONY : src/game.o
 
@@ -201,6 +225,30 @@ src/player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
 
+src/snake.o: src/snake.cpp.o
+.PHONY : src/snake.o
+
+# target to build an object file
+src/snake.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/snake.cpp.o
+.PHONY : src/snake.cpp.o
+
+src/snake.i: src/snake.cpp.i
+.PHONY : src/snake.i
+
+# target to preprocess a source file
+src/snake.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/snake.cpp.i
+.PHONY : src/snake.cpp.i
+
+src/snake.s: src/snake.cpp.s
+.PHONY : src/snake.s
+
+# target to generate assembly for a file
+src/snake.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/snake.cpp.s
+.PHONY : src/snake.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -210,6 +258,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sdl3-snake"
+	@echo "... src/entity.o"
+	@echo "... src/entity.i"
+	@echo "... src/entity.s"
 	@echo "... src/game.o"
 	@echo "... src/game.i"
 	@echo "... src/game.s"
@@ -219,6 +270,9 @@ help:
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
+	@echo "... src/snake.o"
+	@echo "... src/snake.i"
+	@echo "... src/snake.s"
 .PHONY : help
 
 

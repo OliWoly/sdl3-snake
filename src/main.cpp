@@ -6,16 +6,22 @@
 
 
 int main(){
-    std::cout << "Running." << std::endl;
     Game game(1280, 720);
-    
-    game.initEngine();
-    while (game.get_running() == true){
+    // Start Game Loop
+    while (game.get_running()){
         game.eventHandler();
+        game.update();
+        
+        
+        
+        
+        
         SDL_Delay(16);
     }
 
 
-
-
+    // Clean
+    game.cleanup();
+    std::cout << "Finished.";
+    return 0;
 }

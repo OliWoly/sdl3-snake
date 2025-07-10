@@ -1,10 +1,14 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/sdl3-snake.dir/src/entity.cpp.o"
+  "CMakeFiles/sdl3-snake.dir/src/entity.cpp.o.d"
   "CMakeFiles/sdl3-snake.dir/src/game.cpp.o"
   "CMakeFiles/sdl3-snake.dir/src/game.cpp.o.d"
   "CMakeFiles/sdl3-snake.dir/src/main.cpp.o"
   "CMakeFiles/sdl3-snake.dir/src/main.cpp.o.d"
   "CMakeFiles/sdl3-snake.dir/src/player.cpp.o"
   "CMakeFiles/sdl3-snake.dir/src/player.cpp.o.d"
+  "CMakeFiles/sdl3-snake.dir/src/snake.cpp.o"
+  "CMakeFiles/sdl3-snake.dir/src/snake.cpp.o.d"
   "sdl3-snake"
   "sdl3-snake.pdb"
 )

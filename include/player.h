@@ -1,15 +1,19 @@
 #pragma once
-#include "SDL3/SDL.h"
-#include "position.h"
-#include "colour.h"
+#include <string>
 
-class Player{
+#include "entity.h"
+
+
+class Player : public Entity{
     private:
-        Position pos;
-        Colour col;
+        std::string name = "Player";
+        float v;
 
     public:
-        explicit Player(int x, int y);
-    
+        explicit Player();
+        void set_name(std::string name);
+        void set_v(float v);
+
+        std::string get_name();
 };
 

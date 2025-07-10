@@ -1,27 +1,16 @@
 #pragma once
-#include "SDL3/SDL.h"
-
-class Game_External {
-    public:
-        int screenWidth;
-        int screenHeight;
-        SDL_Window *window;
-        SDL_Renderer *renderer;
-};
-
-class Game_Mouse {
-    public:
-        float x;
-        float y;
-        float gx;
-        float gy;
-};
+#include <SDL3/SDL.h>
+#include "game_extra.h"
+#include "snake.h"
 
 class Game {
     private:
         Game_External ext;
         Game_Mouse mouse;
         SDL_Event event;
+
+        Snake snake;
+
         bool running;
         float td;
         float targetFrametime;
@@ -31,11 +20,24 @@ class Game {
         explicit Game(int w, int h);
 
         // Methods
-        void initEngine();
-        void eventHandler();
-        void closeWithOS();
-        void handleKeyboard();
-        void handleKeyboard_KeyDown();
+            // Running
+            void update();
+            void update_fixed();
+
+            // Init
+            void initEngine();
+            void initClasses();
+            void cleanup();
+        
+            // Events
+            void eventHandler();
+            void closeWithOS();
+            void handleKeyboard();
+            void handleKeyboard_KeyDown();
+
+            // Drawing
+            void drawing();
+            void drawing_snake();
 
         // Getters
         bool get_running();

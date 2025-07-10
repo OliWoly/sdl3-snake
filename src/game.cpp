@@ -1,4 +1,6 @@
 #include <iostream>
+#include <optional>
+#include <thread>
 #include "../include/game.h"
 
 
@@ -21,9 +23,31 @@ Game::Game(int w, int h){
 
     // Init Methods
     this->initEngine();
+    this->initClasses();
 };
 
 // Class Methods
+
+void Game::update(){
+    this->drawing();
+}
+
+void Game::drawing(){
+    // Cleanup
+    SDL_SetRenderDrawColor(this->ext.renderer, 0, 0, 0, 255);
+    SDL_RenderClear(this->ext.renderer);
+
+    // Do Drawing
+    this->drawing_snake();
+
+    // Present all.
+    SDL_RenderPresent(this->ext.renderer);
+}
+
+void Game::drawing_snake(){
+    this->snake.head.draw(this->ext.renderer);
+
+}
 
 void Game::closeWithOS(){
     if (this->event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
@@ -50,6 +74,14 @@ void Game::eventHandler(){
     }
 }
 
+void Game::initClasses(){
+    this->snake = Snake();
+    // Assigning default values for head.
+    this->snake.head.set_positionALT(100, 100, std::nullopt);
+    this->snake.head.set_dimensions(200, 200, 1);
+    this->snake.head.set_colourALT(std::nullopt, 0, 0,std::nullopt);
+}
+
 void Game::initEngine(){
     // SDL Initialise
     SDL_Init(SDL_INIT_VIDEO);
@@ -64,6 +96,13 @@ void Game::initEngine(){
     this->ext.renderer = SDL_CreateRenderer(this->ext.window, NULL);
     if (!this->ext.renderer) {
         std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
+    }
+}
+
+void Game::cleanup(){
+    if (!this->running){
+        SDL_DestroyRenderer(this->ext.renderer);
+        SDL_DestroyWindow(this->ext.window);
     }
 }
 

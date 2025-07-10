@@ -8,9 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/oli/Documents/code/sdl3-snake/src/entity.cpp" "CMakeFiles/sdl3-snake.dir/src/entity.cpp.o" "gcc" "CMakeFiles/sdl3-snake.dir/src/entity.cpp.o.d"
   "/Users/oli/Documents/code/sdl3-snake/src/game.cpp" "CMakeFiles/sdl3-snake.dir/src/game.cpp.o" "gcc" "CMakeFiles/sdl3-snake.dir/src/game.cpp.o.d"
   "/Users/oli/Documents/code/sdl3-snake/src/main.cpp" "CMakeFiles/sdl3-snake.dir/src/main.cpp.o" "gcc" "CMakeFiles/sdl3-snake.dir/src/main.cpp.o.d"
   "/Users/oli/Documents/code/sdl3-snake/src/player.cpp" "CMakeFiles/sdl3-snake.dir/src/player.cpp.o" "gcc" "CMakeFiles/sdl3-snake.dir/src/player.cpp.o.d"
+  "/Users/oli/Documents/code/sdl3-snake/src/snake.cpp" "CMakeFiles/sdl3-snake.dir/src/snake.cpp.o" "gcc" "CMakeFiles/sdl3-snake.dir/src/snake.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

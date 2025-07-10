@@ -72,19 +72,19 @@ include CMakeFiles/sdl3-snake.dir/flags.make
 CMakeFiles/sdl3-snake.dir/codegen:
 .PHONY : CMakeFiles/sdl3-snake.dir/codegen
 
-CMakeFiles/sdl3-snake.dir/src/main.cpp.o: CMakeFiles/sdl3-snake.dir/flags.make
-CMakeFiles/sdl3-snake.dir/src/main.cpp.o: /Users/oli/Documents/code/sdl3-snake/src/main.cpp
-CMakeFiles/sdl3-snake.dir/src/main.cpp.o: CMakeFiles/sdl3-snake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sdl3-snake.dir/src/main.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdl3-snake.dir/src/main.cpp.o -MF CMakeFiles/sdl3-snake.dir/src/main.cpp.o.d -o CMakeFiles/sdl3-snake.dir/src/main.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/main.cpp
+CMakeFiles/sdl3-snake.dir/src/entity.cpp.o: CMakeFiles/sdl3-snake.dir/flags.make
+CMakeFiles/sdl3-snake.dir/src/entity.cpp.o: /Users/oli/Documents/code/sdl3-snake/src/entity.cpp
+CMakeFiles/sdl3-snake.dir/src/entity.cpp.o: CMakeFiles/sdl3-snake.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sdl3-snake.dir/src/entity.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdl3-snake.dir/src/entity.cpp.o -MF CMakeFiles/sdl3-snake.dir/src/entity.cpp.o.d -o CMakeFiles/sdl3-snake.dir/src/entity.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/entity.cpp
 
-CMakeFiles/sdl3-snake.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdl3-snake.dir/src/main.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/oli/Documents/code/sdl3-snake/src/main.cpp > CMakeFiles/sdl3-snake.dir/src/main.cpp.i
+CMakeFiles/sdl3-snake.dir/src/entity.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdl3-snake.dir/src/entity.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/oli/Documents/code/sdl3-snake/src/entity.cpp > CMakeFiles/sdl3-snake.dir/src/entity.cpp.i
 
-CMakeFiles/sdl3-snake.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdl3-snake.dir/src/main.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/oli/Documents/code/sdl3-snake/src/main.cpp -o CMakeFiles/sdl3-snake.dir/src/main.cpp.s
+CMakeFiles/sdl3-snake.dir/src/entity.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdl3-snake.dir/src/entity.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/oli/Documents/code/sdl3-snake/src/entity.cpp -o CMakeFiles/sdl3-snake.dir/src/entity.cpp.s
 
 CMakeFiles/sdl3-snake.dir/src/game.cpp.o: CMakeFiles/sdl3-snake.dir/flags.make
 CMakeFiles/sdl3-snake.dir/src/game.cpp.o: /Users/oli/Documents/code/sdl3-snake/src/game.cpp
@@ -100,10 +100,24 @@ CMakeFiles/sdl3-snake.dir/src/game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdl3-snake.dir/src/game.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/oli/Documents/code/sdl3-snake/src/game.cpp -o CMakeFiles/sdl3-snake.dir/src/game.cpp.s
 
+CMakeFiles/sdl3-snake.dir/src/main.cpp.o: CMakeFiles/sdl3-snake.dir/flags.make
+CMakeFiles/sdl3-snake.dir/src/main.cpp.o: /Users/oli/Documents/code/sdl3-snake/src/main.cpp
+CMakeFiles/sdl3-snake.dir/src/main.cpp.o: CMakeFiles/sdl3-snake.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sdl3-snake.dir/src/main.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdl3-snake.dir/src/main.cpp.o -MF CMakeFiles/sdl3-snake.dir/src/main.cpp.o.d -o CMakeFiles/sdl3-snake.dir/src/main.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/main.cpp
+
+CMakeFiles/sdl3-snake.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdl3-snake.dir/src/main.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/oli/Documents/code/sdl3-snake/src/main.cpp > CMakeFiles/sdl3-snake.dir/src/main.cpp.i
+
+CMakeFiles/sdl3-snake.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdl3-snake.dir/src/main.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/oli/Documents/code/sdl3-snake/src/main.cpp -o CMakeFiles/sdl3-snake.dir/src/main.cpp.s
+
 CMakeFiles/sdl3-snake.dir/src/player.cpp.o: CMakeFiles/sdl3-snake.dir/flags.make
 CMakeFiles/sdl3-snake.dir/src/player.cpp.o: /Users/oli/Documents/code/sdl3-snake/src/player.cpp
 CMakeFiles/sdl3-snake.dir/src/player.cpp.o: CMakeFiles/sdl3-snake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sdl3-snake.dir/src/player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/sdl3-snake.dir/src/player.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdl3-snake.dir/src/player.cpp.o -MF CMakeFiles/sdl3-snake.dir/src/player.cpp.o.d -o CMakeFiles/sdl3-snake.dir/src/player.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/player.cpp
 
 CMakeFiles/sdl3-snake.dir/src/player.cpp.i: cmake_force
@@ -114,22 +128,40 @@ CMakeFiles/sdl3-snake.dir/src/player.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdl3-snake.dir/src/player.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/oli/Documents/code/sdl3-snake/src/player.cpp -o CMakeFiles/sdl3-snake.dir/src/player.cpp.s
 
+CMakeFiles/sdl3-snake.dir/src/snake.cpp.o: CMakeFiles/sdl3-snake.dir/flags.make
+CMakeFiles/sdl3-snake.dir/src/snake.cpp.o: /Users/oli/Documents/code/sdl3-snake/src/snake.cpp
+CMakeFiles/sdl3-snake.dir/src/snake.cpp.o: CMakeFiles/sdl3-snake.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sdl3-snake.dir/src/snake.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdl3-snake.dir/src/snake.cpp.o -MF CMakeFiles/sdl3-snake.dir/src/snake.cpp.o.d -o CMakeFiles/sdl3-snake.dir/src/snake.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/snake.cpp
+
+CMakeFiles/sdl3-snake.dir/src/snake.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdl3-snake.dir/src/snake.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/oli/Documents/code/sdl3-snake/src/snake.cpp > CMakeFiles/sdl3-snake.dir/src/snake.cpp.i
+
+CMakeFiles/sdl3-snake.dir/src/snake.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdl3-snake.dir/src/snake.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/oli/Documents/code/sdl3-snake/src/snake.cpp -o CMakeFiles/sdl3-snake.dir/src/snake.cpp.s
+
 # Object files for target sdl3-snake
 sdl3__snake_OBJECTS = \
-"CMakeFiles/sdl3-snake.dir/src/main.cpp.o" \
+"CMakeFiles/sdl3-snake.dir/src/entity.cpp.o" \
 "CMakeFiles/sdl3-snake.dir/src/game.cpp.o" \
-"CMakeFiles/sdl3-snake.dir/src/player.cpp.o"
+"CMakeFiles/sdl3-snake.dir/src/main.cpp.o" \
+"CMakeFiles/sdl3-snake.dir/src/player.cpp.o" \
+"CMakeFiles/sdl3-snake.dir/src/snake.cpp.o"
 
 # External object files for target sdl3-snake
 sdl3__snake_EXTERNAL_OBJECTS =
 
-sdl3-snake: CMakeFiles/sdl3-snake.dir/src/main.cpp.o
+sdl3-snake: CMakeFiles/sdl3-snake.dir/src/entity.cpp.o
 sdl3-snake: CMakeFiles/sdl3-snake.dir/src/game.cpp.o
+sdl3-snake: CMakeFiles/sdl3-snake.dir/src/main.cpp.o
 sdl3-snake: CMakeFiles/sdl3-snake.dir/src/player.cpp.o
+sdl3-snake: CMakeFiles/sdl3-snake.dir/src/snake.cpp.o
 sdl3-snake: CMakeFiles/sdl3-snake.dir/build.make
 sdl3-snake: /opt/homebrew/lib/libSDL3.0.dylib
 sdl3-snake: CMakeFiles/sdl3-snake.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable sdl3-snake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable sdl3-snake"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sdl3-snake.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

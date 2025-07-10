@@ -2,8 +2,8 @@
 
 class Colour{
     public:
-        int r;
-        int g;
-        int b;
-        int a;
+        int r = 255;
+        int g = 255;
+        int b = 255;
+        int a = 255;
 };
