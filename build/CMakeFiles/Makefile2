@@ -85,12 +85,12 @@ clean: CMakeFiles/sdl3-snake.dir/clean
 CMakeFiles/sdl3-snake.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=1,2 "Built target sdl3-snake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=1,2,3 "Built target sdl3-snake"
 .PHONY : CMakeFiles/sdl3-snake.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sdl3-snake.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/oli/Documents/code/sdl3-snake/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/oli/Documents/code/sdl3-snake/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sdl3-snake.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/oli/Documents/code/sdl3-snake/build/CMakeFiles 0
 .PHONY : CMakeFiles/sdl3-snake.dir/rule
@@ -102,7 +102,7 @@ sdl3-snake: CMakeFiles/sdl3-snake.dir/rule
 # codegen rule for target.
 CMakeFiles/sdl3-snake.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=1,2 "Finished codegen for target sdl3-snake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=1,2,3 "Finished codegen for target sdl3-snake"
 .PHONY : CMakeFiles/sdl3-snake.dir/codegen
 
 # clean rule for target.
