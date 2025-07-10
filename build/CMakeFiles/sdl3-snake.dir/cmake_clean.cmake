@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/sdl3-snake.dir/src/main.cpp.o"
+  "CMakeFiles/sdl3-snake.dir/src/main.cpp.o.d"
+  "sdl3-snake"
+  "sdl3-snake.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/sdl3-snake.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
