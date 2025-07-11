@@ -38,7 +38,7 @@ Game::Game(int w, int h){
 // Class Methods
 
 void Game::drawing_text(){
-    SDL_RenderTexture(this->ext.renderer, this->textImage, NULL, NULL);
+    SDL_RenderTexture(this->ext.renderer, this->textImage, NULL, &this->textRect);
 }
 
 void Game::update(){
@@ -205,17 +205,31 @@ void Game::initClasses(){
         std::cout << "ERROR FONT" << std::endl;
     }
 
+    // Only a surface can be made from text, have to convert to texture later.
     SDL_Surface *surface = TTF_RenderText_Blended(this->font, "Snake", 0, this->textColour);
     if (!surface){
         std::cout << "ERROR SURFACE" << std::endl;
     }
 
+    // Copy size from the surface before freeing the surface.
+    this->textRect.w = surface->w;
+    this->textRect.h = surface->h;
+
+    // Create Texture from the Surface.
     this->textImage = SDL_CreateTextureFromSurface(this->ext.renderer, surface);
+
+    // Finally Destroy the Surface.
     SDL_DestroySurface(surface);
     surface = NULL;
+
+    // Check if the texture was created after destroying surface 
+    // to make sure deletion works properly
     if (!this->textImage){
         std::cout << "ERROR CREATING TEXTURE FROM SURFACE" << std::endl;
     }
+
+    // Texture Flag for scaling method.
+    SDL_SetTextureScaleMode(this->textImage, SDL_SCALEMODE_NEAREST);
 }
 
 void Game::initEngine(){

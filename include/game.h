@@ -23,6 +23,7 @@ class Game {
         Game_Grid grid;
         TTF_Font *font;
         SDL_Texture *textImage;
+        SDL_FRect textRect;
         SDL_Color textColour={255, 255, 255, 255};
 
         // Methods
