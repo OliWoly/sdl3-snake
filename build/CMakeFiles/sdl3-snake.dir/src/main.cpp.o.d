@@ -855,8 +855,9 @@ CMakeFiles/sdl3-snake.dir/src/main.cpp.o: \
   /opt/homebrew/include/SDL3/SDL_version.h \
   /opt/homebrew/include/SDL3/SDL_oldnames.h \
   /Users/oli/Documents/code/sdl3-snake/src/../include/game.h \
-  /opt/homebrew/include/SDL3_ttf/SDL_ttf.h \
   /Users/oli/Documents/code/sdl3-snake/src/../include/game_extra.h \
+  /Users/oli/Documents/code/sdl3-snake/src/../include/game_font.h \
+  /opt/homebrew/include/SDL3_ttf/SDL_ttf.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \

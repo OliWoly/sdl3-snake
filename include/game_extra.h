@@ -1,7 +1,9 @@
 #pragma once
 #include <SDL3/SDL.h>
-
+#include "game_font.h"
 #include <chrono>
+
+
 
 class Game_Grid{
     public:
@@ -20,6 +22,9 @@ class Game_Counters {
     public:
         std::chrono::high_resolution_clock::time_point lastSnakeMove = std::chrono::high_resolution_clock::now();
         float sinceLastSnakeMove;
+
+        std::chrono::high_resolution_clock::time_point lastPhysicsCalc = std::chrono::high_resolution_clock::now();
+        float sinceLastPhysicsCalc;
 };
 
 class Game_External {

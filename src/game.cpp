@@ -38,13 +38,27 @@ Game::Game(int w, int h){
 // Class Methods
 
 void Game::drawing_text(){
-    SDL_RenderTexture(this->ext.renderer, this->textImage, NULL, &this->textRect);
+    this->title.draw(this->ext.renderer);
+    this->debug.draw(this->ext.renderer);
+}
+
+void Game::logic_text(){
+    this->move_titleText();
+    this->updateDebugText();
+}
+
+void Game::updateDebugText(){
+    std::string tdStr = std::to_string(this->td);
+    this->debug.changeText(tdStr.c_str(), this->ext.renderer);
+}
+
+void Game::move_titleText(){
+    this->title.rect.x += 0.2 * this->td;
 }
 
 void Game::update(){
     while (this->running){
         auto start = std::chrono::high_resolution_clock::now();
-        
         this->eventHandler();
         this->update_fixed();
         this->drawing();
@@ -101,6 +115,10 @@ void Game::update_fixed(){
     if (this->counters.sinceLastSnakeMove > SNAKE_MOVE_RATE){
         this->logic_snake();
     }
+
+    if (this->counters.sinceLastPhysicsCalc > PHYSICS_REFRESH_RATE){
+        this->logic_text();
+    }
     
 }
 
@@ -108,6 +126,7 @@ void Game::update_counters(){
     auto now = std::chrono::high_resolution_clock::now();
 
     this->counters.sinceLastSnakeMove = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastSnakeMove).count();
+    this->counters.sinceLastPhysicsCalc = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastPhysicsCalc).count();
 }
 
 void Game::drawing(){
@@ -200,36 +219,11 @@ void Game::initClasses(){
     }
 
     // Text
-    this->font = TTF_OpenFont("../recourses/fonts/Daydream.ttf", 24);
-    if (!this->font){
-        std::cout << "ERROR FONT" << std::endl;
-    }
+    this->title.init("../recourses/fonts/Daydream.ttf", 24, SDL_Color{255, 255, 255, 255}, this->ext.renderer);
+    this->title.changeText("HELLO", this->ext.renderer);
 
-    // Only a surface can be made from text, have to convert to texture later.
-    SDL_Surface *surface = TTF_RenderText_Blended(this->font, "Snake", 0, this->textColour);
-    if (!surface){
-        std::cout << "ERROR SURFACE" << std::endl;
-    }
-
-    // Copy size from the surface before freeing the surface.
-    this->textRect.w = surface->w;
-    this->textRect.h = surface->h;
-
-    // Create Texture from the Surface.
-    this->textImage = SDL_CreateTextureFromSurface(this->ext.renderer, surface);
-
-    // Finally Destroy the Surface.
-    SDL_DestroySurface(surface);
-    surface = NULL;
-
-    // Check if the texture was created after destroying surface 
-    // to make sure deletion works properly
-    if (!this->textImage){
-        std::cout << "ERROR CREATING TEXTURE FROM SURFACE" << std::endl;
-    }
-
-    // Texture Flag for scaling method.
-    SDL_SetTextureScaleMode(this->textImage, SDL_SCALEMODE_NEAREST);
+    this->debug.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{255, 255, 255, 255}, this->ext.renderer);
+    this->debug.changeText("HELLO", this->ext.renderer);
 }
 
 void Game::initEngine(){
@@ -259,9 +253,9 @@ void Game::initEngine(){
 
 void Game::cleanup(){
     // First check if pointer exists to avoid freeing nullptr.
-    if (this->font){
-        TTF_CloseFont(this->font);
-        this->font = NULL;
+    if (this->title.font){
+        TTF_CloseFont(this->title.font);
+        this->title.font = NULL;
     }
     
     if (this->ext.renderer){

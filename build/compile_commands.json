@@ -13,6 +13,12 @@
 },
 {
   "directory": "/Users/oli/Documents/code/sdl3-snake/build",
+  "command": "/usr/bin/clang++  -I/Users/oli/Documents/code/sdl3-snake/include -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/sdl3-snake.dir/src/game_font.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/game_font.cpp",
+  "file": "/Users/oli/Documents/code/sdl3-snake/src/game_font.cpp",
+  "output": "CMakeFiles/sdl3-snake.dir/src/game_font.cpp.o"
+},
+{
+  "directory": "/Users/oli/Documents/code/sdl3-snake/build",
   "command": "/usr/bin/clang++  -I/Users/oli/Documents/code/sdl3-snake/include -isystem /opt/homebrew/include -g -std=gnu++17 -arch arm64 -o CMakeFiles/sdl3-snake.dir/src/main.cpp.o -c /Users/oli/Documents/code/sdl3-snake/src/main.cpp",
   "file": "/Users/oli/Documents/code/sdl3-snake/src/main.cpp",
   "output": "CMakeFiles/sdl3-snake.dir/src/main.cpp.o"

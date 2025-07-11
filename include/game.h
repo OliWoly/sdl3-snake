@@ -1,7 +1,6 @@
 #pragma once
-#include <SDL3/SDL.h>
-#include <SDL3_ttf/SDL_ttf.h>
 #include "game_extra.h"
+#include "game_font.h"
 #include "snake.h"
 
 class Game {
@@ -10,8 +9,10 @@ class Game {
         Game_Mouse mouse;
         Game_Counters counters;
         SDL_Event event;
-
         Snake snake;
+
+        Game_Font title;
+        Game_Font debug;
 
         bool running;
         float td;
@@ -21,10 +22,6 @@ class Game {
         // Explicit is good practice.
         explicit Game(int w, int h);
         Game_Grid grid;
-        TTF_Font *font;
-        SDL_Texture *textImage;
-        SDL_FRect textRect;
-        SDL_Color textColour={255, 255, 255, 255};
 
         // Methods
             // Running
@@ -35,6 +32,9 @@ class Game {
             // Logic
             void logic();
             void logic_snake();
+            void logic_text();
+                void move_titleText();
+                void updateDebugText();
 
             // Init
             void initEngine();

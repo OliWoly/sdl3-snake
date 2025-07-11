@@ -177,6 +177,30 @@ src/game.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/game.cpp.s
 .PHONY : src/game.cpp.s
 
+src/game_font.o: src/game_font.cpp.o
+.PHONY : src/game_font.o
+
+# target to build an object file
+src/game_font.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/game_font.cpp.o
+.PHONY : src/game_font.cpp.o
+
+src/game_font.i: src/game_font.cpp.i
+.PHONY : src/game_font.i
+
+# target to preprocess a source file
+src/game_font.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/game_font.cpp.i
+.PHONY : src/game_font.cpp.i
+
+src/game_font.s: src/game_font.cpp.s
+.PHONY : src/game_font.s
+
+# target to generate assembly for a file
+src/game_font.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/game_font.cpp.s
+.PHONY : src/game_font.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -264,6 +288,9 @@ help:
 	@echo "... src/game.o"
 	@echo "... src/game.i"
 	@echo "... src/game.s"
+	@echo "... src/game_font.o"
+	@echo "... src/game_font.i"
+	@echo "... src/game_font.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
