@@ -1,8 +1,6 @@
 #include <iostream>
 #include <optional>
 #include <chrono>
-#include <thread>
-#include <filesystem>
 #include "../include/game.h"
 
 
@@ -36,26 +34,6 @@ Game::Game(int w, int h){
 };
 
 // Class Methods
-
-void Game::drawing_text(){
-    this->title.draw(this->ext.renderer);
-    this->debug.draw(this->ext.renderer);
-}
-
-void Game::logic_text(){
-    this->move_titleText();
-    this->updateDebugText();
-}
-
-void Game::updateDebugText(){
-    std::string tdStr = std::to_string(this->td);
-    this->debug.changeText(tdStr.c_str(), this->ext.renderer);
-}
-
-void Game::move_titleText(){
-    this->title.rect.x += 0.2 * this->td;
-}
-
 void Game::update(){
     while (this->running){
         auto start = std::chrono::high_resolution_clock::now();
@@ -72,6 +50,23 @@ void Game::update(){
             this->td = ms.count();  // Update Time Delta
         }
     }
+}
+void Game::update_fixed(){
+    this->update_counters();
+    if (this->counters.sinceLastSnakeMove > SNAKE_MOVE_RATE){
+        this->logic_snake();
+    }
+
+    if (this->counters.sinceLastPhysicsCalc > PHYSICS_REFRESH_RATE){
+        this->logic_text();
+    }
+    
+}
+void Game::update_counters(){
+    auto now = std::chrono::high_resolution_clock::now();
+
+    this->counters.sinceLastSnakeMove = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastSnakeMove).count();
+    this->counters.sinceLastPhysicsCalc = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastPhysicsCalc).count();
 }
 
 void Game::logic_snake(){
@@ -109,38 +104,34 @@ void Game::logic_snake(){
     }
 
 }
-
-void Game::update_fixed(){
-    this->update_counters();
-    if (this->counters.sinceLastSnakeMove > SNAKE_MOVE_RATE){
-        this->logic_snake();
-    }
-
-    if (this->counters.sinceLastPhysicsCalc > PHYSICS_REFRESH_RATE){
-        this->logic_text();
-    }
-    
+void Game::logic_text(){
+    this->move_titleText();
+    this->updateDebugText();
+}
+void Game::move_titleText(){
+    this->title.rect.x += 0.2 * this->td;
+}
+void Game::updateDebugText(){
+    std::string tdStr = std::to_string(this->td);
+    this->debug.changeText(tdStr.c_str(), this->ext.renderer);
 }
 
-void Game::update_counters(){
-    auto now = std::chrono::high_resolution_clock::now();
 
-    this->counters.sinceLastSnakeMove = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastSnakeMove).count();
-    this->counters.sinceLastPhysicsCalc = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastPhysicsCalc).count();
-}
+
+
 
 void Game::drawing(){
     SDL_SetRenderDrawColor(this->ext.renderer, 0, 0, 0, 255);
     SDL_RenderClear(this->ext.renderer);
 
 
+    this->drawing_grid();
     this->drawing_snake();
     this->drawing_text();
 
 
     SDL_RenderPresent(this->ext.renderer);
 }
-
 void Game::drawing_snake(){
     this->snake.head.draw(this->ext.renderer);
     for (int i=0; i < this->snake.body.size(); i++){
@@ -148,17 +139,52 @@ void Game::drawing_snake(){
     }
 
 }
+void Game::drawing_text(){
+    this->title.draw(this->ext.renderer);
+    this->debug.draw(this->ext.renderer);
+}
+void Game::drawing_grid(){
+    this->grid.rect.x = this->grid.xO;
+    this->grid.rect.y = this->grid.yO;
+    this->grid.rect.w = this->grid.width_pixels;
+    this->grid.rect.h = this->grid.height_pixels;
+    SDL_SetRenderDrawColor(this->ext.renderer, this->grid.primaryCol.r, this->grid.primaryCol.g, this->grid.primaryCol.b, this->grid.primaryCol.a);
+    SDL_RenderFillRect(this->ext.renderer, &this->grid.rect);
 
-void Game::closeWithOS(){
-    if (this->event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
-        this->running = false;
-    } 
+    this->grid.rect.w = this->grid.tile_width;
+    this->grid.rect.h = this->grid.tile_height;
+
+    // Preset draw colour to avoid calling it each time.
+    SDL_SetRenderDrawColor(this->ext.renderer, this->grid.secondaryCol.r, this->grid.secondaryCol.g, this->grid.secondaryCol.b, this->grid.secondaryCol.a);
+
+
+    // j is x
+    // i is y
+    for (int j=0; j < this->grid.width_tiles; j++){
+        for (int i=0; i < this->grid.width_tiles; i++){
+            if ((i+j)%2 == 1){
+                this->grid.rect.x = this->grid.xO + j * this->grid.tile_width;
+                this->grid.rect.y = this->grid.yO + i * this->grid.tile_height;
+
+                SDL_RenderFillRect(this->ext.renderer, &this->grid.rect);
+            }
+        }
+    }
 }
 
+
+
+
+
+void Game::eventHandler(){
+    while (SDL_PollEvent(&this->event)) {
+        this->closeWithOS();
+        this->handleKeyboard();
+    }
+}
 void Game::handleKeyboard(){
     this->handleKeyboard_KeyDown();
 }
-
 void Game::handleKeyboard_KeyDown(){
     if (this->event.type == SDL_EVENT_KEY_DOWN){
         switch (this->event.key.key) {
@@ -200,20 +226,45 @@ void Game::handleKeyboard_KeyDown(){
         }
     }
 }
-
-void Game::eventHandler(){
-    while (SDL_PollEvent(&this->event)) {
-        this->closeWithOS();
-        this->handleKeyboard();
-    }
+void Game::closeWithOS(){
+    if (this->event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
+        this->running = false;
+    } 
 }
 
+
+
+
+void Game::initGrid(float heightRelative, int amountX, int amountY){
+    this->grid.heightRelative = heightRelative;
+    this->grid.width_tiles = amountX;
+    this->grid.height_tiles = amountY;
+
+    // Assumed height.
+    this->grid.height_pixels = this->ext.screenHeight * this->grid.heightRelative;
+    this->grid.tile_height = this->grid.height_pixels / this->grid.height_tiles;
+
+
+    // If Square Tiles.
+    this->grid.tile_width = this->grid.tile_height;
+    this->grid.width_pixels = this->grid.tile_width * this->grid.width_tiles;
+    // Recalculate Height for accuracy.
+    this->grid.height_pixels = this->grid.tile_height * this->grid.height_tiles;
+
+    this->grid.xO = (this->ext.screenWidth/2) - (this->grid.width_pixels/2);
+    this->grid.yO = (this->ext.screenHeight/2) - (this->grid.height_pixels/2);
+}
 void Game::initClasses(){
+    
+    // Grid
+    this->initGrid(0.9, 20, 20);
+    this->print_gridAttributes();
+    
     // Snake
     this->snake = Snake();
         // Assigning default values for head.
     {
-        this->snake.head.set_positionALT(0, 0, std::nullopt);
+        this->snake.head.set_positionALT(this->grid.xO, this->grid.yO, std::nullopt);
         this->snake.head.set_dimensions(this->grid.tile_width, this->grid.tile_height, 1);
         this->snake.head.set_colourALT(std::nullopt, 0, 0,std::nullopt);
     }
@@ -224,8 +275,9 @@ void Game::initClasses(){
 
     this->debug.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{255, 255, 255, 255}, this->ext.renderer);
     this->debug.changeText("HELLO", this->ext.renderer);
-}
 
+    
+}
 void Game::initEngine(){
     // SDL Initialise
     SDL_Init(SDL_INIT_VIDEO);
@@ -250,7 +302,6 @@ void Game::initEngine(){
     // Misc
     SDL_SetRenderVSync(this->ext.renderer, SDL_RENDERER_VSYNC_DISABLED);
 }
-
 void Game::cleanup(){
     // First check if pointer exists to avoid freeing nullptr.
     if (this->title.font){
@@ -271,14 +322,30 @@ void Game::cleanup(){
     TTF_Quit();
 }
 
+
+
+
+
 // Getters
+void Game::print_gridAttributes(){
+    std::cout << "Grid Width in Tiles: " << this->grid.width_tiles << std::endl;
+    std::cout << "Grid Height in Tiles: " << this->grid.height_tiles << std::endl;
+
+    std::cout << "Grid Width in Pixels: " << this->grid.width_pixels << std::endl;
+    std::cout << "Grid Height in Pixels: " << this->grid.height_pixels << std::endl;
+
+    std::cout << "Tile Width in Pixels: " << this->grid.tile_width << std::endl;
+    std::cout << "Tile Height in Pixels: " << this->grid.tile_height << std::endl;
+
+    std::cout << "X Origin: " << this->grid.xO << std::endl;
+    std::cout << "Y Origin: " << this->grid.yO << std::endl;
+}
 
 bool Game::get_running(){
     return this->running;
 }
 
 // Setters
-
 void Game::set_running(bool value){
     this->running = value;
 }

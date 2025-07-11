@@ -39,6 +39,7 @@ class Game {
             // Init
             void initEngine();
             void initClasses();
+                void initGrid(float heightRelative, int amountX, int amountY);
             void cleanup();
         
             // Events
@@ -51,8 +52,10 @@ class Game {
             void drawing();
             void drawing_snake();
             void drawing_text();
+            void drawing_grid();
 
         // Getters
+        void print_gridAttributes();
         bool get_running();
 
         // Setters

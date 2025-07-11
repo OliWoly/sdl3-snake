@@ -30,3 +30,5 @@ file.
 }
 ```
 Need to add the same path as listed in the cmakelists.txt include path in this file. This file tells VScode where to look for C++ libraries.
+
+Also sometimes forgets that it knows SDL3 and have to play around with the include line until it recognises it. Probs macos bug or something..
