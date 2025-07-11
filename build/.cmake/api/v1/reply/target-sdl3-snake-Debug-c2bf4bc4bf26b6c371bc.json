@@ -26,19 +26,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 12,
+				"line" : 13,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 20,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 15,
+				"line" : 16,
 				"parent" : 0
 			}
 		]
@@ -60,6 +60,7 @@
 				},
 				{
 					"backtrace" : 2,
+					"isSystem" : true,
 					"path" : "/opt/homebrew/include"
 				}
 			],
@@ -93,6 +94,11 @@
 			},
 			{
 				"fragment" : "-Wl,-rpath,/opt/homebrew/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/opt/homebrew/lib/libSDL3_ttf.0.2.2.dylib",
 				"role" : "libraries"
 			},
 			{

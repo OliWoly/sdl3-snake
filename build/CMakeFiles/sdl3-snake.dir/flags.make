@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/clang++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/oli/Documents/code/sdl3-snake/include -I/opt/homebrew/include
+CXX_INCLUDES = -I/Users/oli/Documents/code/sdl3-snake/include -isystem /opt/homebrew/include
 
 CXX_FLAGSarm64 = -g -std=gnu++17 -arch arm64
 

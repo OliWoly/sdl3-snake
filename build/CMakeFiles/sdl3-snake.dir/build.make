@@ -159,6 +159,7 @@ sdl3-snake: CMakeFiles/sdl3-snake.dir/src/main.cpp.o
 sdl3-snake: CMakeFiles/sdl3-snake.dir/src/player.cpp.o
 sdl3-snake: CMakeFiles/sdl3-snake.dir/src/snake.cpp.o
 sdl3-snake: CMakeFiles/sdl3-snake.dir/build.make
+sdl3-snake: /opt/homebrew/lib/libSDL3_ttf.0.2.2.dylib
 sdl3-snake: /opt/homebrew/lib/libSDL3.0.dylib
 sdl3-snake: CMakeFiles/sdl3-snake.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/oli/Documents/code/sdl3-snake/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable sdl3-snake"

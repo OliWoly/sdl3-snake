@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include "game_extra.h"
 #include "snake.h"
 
@@ -20,6 +21,9 @@ class Game {
         // Explicit is good practice.
         explicit Game(int w, int h);
         Game_Grid grid;
+        TTF_Font *font;
+        SDL_Texture *textImage;
+        SDL_Color textColour={255, 255, 255, 255};
 
         // Methods
             // Running
@@ -45,6 +49,7 @@ class Game {
             // Drawing
             void drawing();
             void drawing_snake();
+            void drawing_text();
 
         // Getters
         bool get_running();

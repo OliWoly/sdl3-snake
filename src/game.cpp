@@ -2,10 +2,12 @@
 #include <optional>
 #include <chrono>
 #include <thread>
+#include <filesystem>
 #include "../include/game.h"
 
+
 const float PHYSICS_REFRESH_RATE = 1000.0/240;
-const float SNAKE_MOVE_RATE = 1000.0/60;
+const float SNAKE_MOVE_RATE = 1000.0/20;
 
 Game::Game(int w, int h){
 
@@ -34,6 +36,10 @@ Game::Game(int w, int h){
 };
 
 // Class Methods
+
+void Game::drawing_text(){
+    SDL_RenderTexture(this->ext.renderer, this->textImage, NULL, NULL);
+}
 
 void Game::update(){
     while (this->running){
@@ -110,6 +116,7 @@ void Game::drawing(){
 
 
     this->drawing_snake();
+    this->drawing_text();
 
 
     SDL_RenderPresent(this->ext.renderer);
@@ -117,8 +124,6 @@ void Game::drawing(){
 
 void Game::drawing_snake(){
     this->snake.head.draw(this->ext.renderer);
-
-    std::cout << this->snake.body.size() << std::endl;
     for (int i=0; i < this->snake.body.size(); i++){
         this->snake.body[i].draw(this->ext.renderer);
     }
@@ -185,16 +190,39 @@ void Game::eventHandler(){
 }
 
 void Game::initClasses(){
+    // Snake
     this->snake = Snake();
-    // Assigning default values for head.
-    this->snake.head.set_positionALT(0, 0, std::nullopt);
-    this->snake.head.set_dimensions(this->grid.tile_width, this->grid.tile_height, 1);
-    this->snake.head.set_colourALT(std::nullopt, 0, 0,std::nullopt);
+        // Assigning default values for head.
+    {
+        this->snake.head.set_positionALT(0, 0, std::nullopt);
+        this->snake.head.set_dimensions(this->grid.tile_width, this->grid.tile_height, 1);
+        this->snake.head.set_colourALT(std::nullopt, 0, 0,std::nullopt);
+    }
+
+    // Text
+    this->font = TTF_OpenFont("../recourses/fonts/Daydream.ttf", 24);
+    if (!this->font){
+        std::cout << "ERROR FONT" << std::endl;
+    }
+
+    SDL_Surface *surface = TTF_RenderText_Blended(this->font, "Snake", 0, this->textColour);
+    if (!surface){
+        std::cout << "ERROR SURFACE" << std::endl;
+    }
+
+    this->textImage = SDL_CreateTextureFromSurface(this->ext.renderer, surface);
+    SDL_DestroySurface(surface);
+    surface = NULL;
+    if (!this->textImage){
+        std::cout << "ERROR CREATING TEXTURE FROM SURFACE" << std::endl;
+    }
 }
 
 void Game::initEngine(){
     // SDL Initialise
     SDL_Init(SDL_INIT_VIDEO);
+
+    
 
     // Window Initialise
     this->ext.window = SDL_CreateWindow("SDL3-Snake", this->ext.screenWidth, this->ext.screenHeight, 0);
@@ -207,13 +235,32 @@ void Game::initEngine(){
     if (!this->ext.renderer) {
         std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
     }
+
+    // Text
+    TTF_Init();
+
+    // Misc
+    SDL_SetRenderVSync(this->ext.renderer, SDL_RENDERER_VSYNC_DISABLED);
 }
 
 void Game::cleanup(){
-    if (!this->running){
-        SDL_DestroyRenderer(this->ext.renderer);
-        SDL_DestroyWindow(this->ext.window);
+    // First check if pointer exists to avoid freeing nullptr.
+    if (this->font){
+        TTF_CloseFont(this->font);
+        this->font = NULL;
     }
+    
+    if (this->ext.renderer){
+        SDL_DestroyRenderer(this->ext.renderer);
+        this->ext.renderer = NULL;
+    }
+    if (this->ext.window){
+        SDL_DestroyWindow(this->ext.window);
+        this->ext.window = NULL;
+    }
+    
+    SDL_Quit();
+    TTF_Quit();
 }
 
 // Getters

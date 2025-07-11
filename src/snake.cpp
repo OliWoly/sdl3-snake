@@ -51,12 +51,9 @@ void Snake::step_body(){
     for (int i=this->body.size()-1; i > -1; i--){
         if (i == 0){
             this->body[i].set_position(this->head.pos);
-            //std::cout << i << "->" << "head" << std::endl;
             break;
         }
-
         this->body[i].set_position(this->body[i-1].pos);
-        //std::cout << i << "->" << i-1 << std::endl;
     }
 }
 

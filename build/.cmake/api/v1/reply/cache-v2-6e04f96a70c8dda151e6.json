@@ -1210,6 +1210,18 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "SDL3-TTF_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for SDL3-TTF."
+				}
+			],
+			"type" : "PATH",
+			"value" : "SDL3-TTF_DIR-NOTFOUND"
+		},
+		{
 			"name" : "SDL3_DIR",
 			"properties" : 
 			[
@@ -1220,6 +1232,30 @@
 			],
 			"type" : "PATH",
 			"value" : "/opt/homebrew/lib/cmake/SDL3"
+		},
+		{
+			"name" : "SDL3_TTF_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for SDL3_TTF."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/lib/cmake/SDL3_ttf"
+		},
+		{
+			"name" : "SDL3_ttf_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for SDL3_ttf."
+				}
+			],
+			"type" : "PATH",
+			"value" : "/opt/homebrew/lib/cmake/SDL3_ttf"
 		},
 		{
 			"name" : "sdl3-snake_BINARY_DIR",
