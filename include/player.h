@@ -7,9 +7,9 @@
 class Player : public Entity{
     private:
         std::string name = "Player";
-        float v;
-
+    
     public:
+        float v;
         explicit Player();
         void set_name(std::string name);
         void set_v(float v);

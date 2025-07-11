@@ -6,7 +6,7 @@
 #include "colour.h"
 
 class Entity{
-    private:
+    public:
         Position pos;
         Colour col;
         
@@ -21,7 +21,7 @@ class Entity{
         float ang_d;    // Angle (Degrees)
         float ang_r;    // Angle (Radians)
 
-    public:
+
         explicit Entity();
 
         void draw(SDL_Renderer *renderer);

@@ -7,6 +7,7 @@ class Game {
     private:
         Game_External ext;
         Game_Mouse mouse;
+        Game_Counters counters;
         SDL_Event event;
 
         Snake snake;
@@ -18,11 +19,17 @@ class Game {
     public:
         // Explicit is good practice.
         explicit Game(int w, int h);
+        Game_Grid grid;
 
         // Methods
             // Running
             void update();
             void update_fixed();
+            void update_counters();
+
+            // Logic
+            void logic();
+            void logic_snake();
 
             // Init
             void initEngine();

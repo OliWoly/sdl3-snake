@@ -7,17 +7,7 @@
 
 int main(){
     Game game(1280, 720);
-    // Start Game Loop
-    while (game.get_running()){
-        game.eventHandler();
-        game.update();
-        
-        
-        
-        
-        
-        SDL_Delay(16);
-    }
+    game.update();
 
 
     // Clean
