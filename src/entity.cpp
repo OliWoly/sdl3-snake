@@ -1,10 +1,7 @@
 #include "entity.h"
 
 Entity::Entity(){
-    this->col.r = 255;
-    this->col.g = 0;
-    this->col.b = 0;
-    this->col.a = 255;
+    this->col={0, 200, 200, 0};
 
     
 };

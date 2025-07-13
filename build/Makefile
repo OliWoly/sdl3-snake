@@ -129,6 +129,30 @@ sdl3-snake/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/build
 .PHONY : sdl3-snake/fast
 
+src/apple.o: src/apple.cpp.o
+.PHONY : src/apple.o
+
+# target to build an object file
+src/apple.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/apple.cpp.o
+.PHONY : src/apple.cpp.o
+
+src/apple.i: src/apple.cpp.i
+.PHONY : src/apple.i
+
+# target to preprocess a source file
+src/apple.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/apple.cpp.i
+.PHONY : src/apple.cpp.i
+
+src/apple.s: src/apple.cpp.s
+.PHONY : src/apple.s
+
+# target to generate assembly for a file
+src/apple.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl3-snake.dir/build.make CMakeFiles/sdl3-snake.dir/src/apple.cpp.s
+.PHONY : src/apple.cpp.s
+
 src/entity.o: src/entity.cpp.o
 .PHONY : src/entity.o
 
@@ -282,6 +306,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sdl3-snake"
+	@echo "... src/apple.o"
+	@echo "... src/apple.i"
+	@echo "... src/apple.s"
 	@echo "... src/entity.o"
 	@echo "... src/entity.i"
 	@echo "... src/entity.s"

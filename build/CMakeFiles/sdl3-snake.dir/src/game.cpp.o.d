@@ -866,4 +866,5 @@ CMakeFiles/sdl3-snake.dir/src/game.cpp.o: \
   /Users/oli/Documents/code/sdl3-snake/src/../include/player.h \
   /Users/oli/Documents/code/sdl3-snake/src/../include/entity.h \
   /opt/homebrew/include/SDL3/SDl.h \
-  /Users/oli/Documents/code/sdl3-snake/src/../include/position.h
+  /Users/oli/Documents/code/sdl3-snake/src/../include/position.h \
+  /Users/oli/Documents/code/sdl3-snake/src/../include/apple.h

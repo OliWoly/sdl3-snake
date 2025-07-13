@@ -2,10 +2,11 @@
 #include <optional>
 #include <chrono>
 #include "../include/game.h"
+#include "../include/apple.h"
 
 
-const float PHYSICS_REFRESH_RATE = 1000.0/240;
-const float SNAKE_MOVE_RATE = 1000.0/20;
+constexpr float PHYSICS_REFRESH_RATE = 1000.0/240;
+constexpr float SNAKE_MOVE_RATE = 1000.0/20;
 
 Game::Game(int w, int h){
 
@@ -127,6 +128,7 @@ void Game::drawing(){
 
     this->drawing_grid();
     this->drawing_snake();
+    //this->drawing_apple();
     this->drawing_text();
 
 
@@ -170,6 +172,9 @@ void Game::drawing_grid(){
             }
         }
     }
+}
+void Game::drawing_apple(){
+    this->apple.draw(this->ext.renderer);
 }
 
 
@@ -258,7 +263,7 @@ void Game::initClasses(){
     
     // Grid
     this->initGrid(0.9, 20, 20);
-    this->print_gridAttributes();
+    //this->print_gridAttributes();
     
     // Snake
     this->snake = Snake();
@@ -269,14 +274,21 @@ void Game::initClasses(){
         this->snake.head.set_colourALT(std::nullopt, 0, 0,std::nullopt);
     }
 
+    // Apple
+    this->apple = Apple();
+    {
+        this->apple.set_positionALT(this->grid.tile_width*4, this->grid.tile_height*4, 0);
+    }
+    std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
+    std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
+
+
     // Text
-    this->title.init("../recourses/fonts/Daydream.ttf", 24, SDL_Color{255, 255, 255, 255}, this->ext.renderer);
-    this->title.changeText("HELLO", this->ext.renderer);
+    this->title.init("../recourses/fonts/Daydream.ttf", 24, SDL_Color{255, 255, 255, 255},this->ext.renderer);
+    this->title.changeText("TITLE", this->ext.renderer);
 
-    this->debug.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{255, 255, 255, 255}, this->ext.renderer);
-    this->debug.changeText("HELLO", this->ext.renderer);
-
-    
+    this->debug.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->debug.changeText("DEBUG", this->ext.renderer);
 }
 void Game::initEngine(){
     // SDL Initialise

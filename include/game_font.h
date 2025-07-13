@@ -6,8 +6,8 @@ class Game_Font{
     public:
         TTF_Font *font;
         SDL_Texture *texture;
-        SDL_FRect rect;
-        SDL_Color col={255, 255, 255, 255};
+        SDL_FRect rect = {0, 0, 0, 0};
+        SDL_Color col = {255, 255, 255, 255};
         const char *text = "SAMPLE";
 
         explicit Game_Font();
@@ -20,6 +20,7 @@ class Game_Font{
 
         // Getters
         const char* get_text();
+        void print_attributes();
 
         // Setters
         void set_text(const char *text);

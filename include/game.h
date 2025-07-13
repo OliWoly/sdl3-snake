@@ -2,21 +2,23 @@
 #include "game_extra.h"
 #include "game_font.h"
 #include "snake.h"
+#include "apple.h"
 
 class Game {
     private:
-        Game_External ext;
-        Game_Mouse mouse;
+        Game_External ext{};
+        Game_Mouse mouse{};
         Game_Counters counters;
-        SDL_Event event;
+        SDL_Event event{};
         Snake snake;
+        Apple apple;
 
         Game_Font title;
         Game_Font debug;
 
         bool running;
-        float td;
-        float targetFrametime;
+        float td{};
+        float targetFrametime{};
 
     public:
         // Explicit is good practice.
@@ -53,6 +55,7 @@ class Game {
             void drawing_snake();
             void drawing_text();
             void drawing_grid();
+            void drawing_apple();
 
         // Getters
         void print_gridAttributes();

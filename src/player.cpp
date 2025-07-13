@@ -5,7 +5,7 @@
 Player::Player()
     : Entity()
     {
-
+        this->col={255, 0, 0, 255};
 };
 
 void Player::set_name(std::string name){

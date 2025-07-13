@@ -6,13 +6,15 @@ Game_Font::Game_Font(){
 }
 
 void Game_Font::draw(SDL_Renderer *renderer){
-    SDL_RenderTexture(renderer, this->texture, NULL, &this->rect);
+    SDL_RenderTexture(renderer, this->texture, nullptr, &this->rect);
 }
 
 void Game_Font::init(const char* fontPath, float fontSize, SDL_Color colour, SDL_Renderer *renderer){
     // Set new colour.
     this->col = colour;
+
     this->init_font(fontPath, fontSize);
+    this->set_text("SAMPLE");
     this->refreshText(renderer);
     
     
@@ -58,6 +60,12 @@ void Game_Font::changeText(const char *newText, SDL_Renderer *renderer){
 // Getters
 const char* Game_Font::get_text(){
     return this->text;
+}
+
+void Game_Font::print_attributes() {
+    std::cout << this->text << std::endl;
+    std::cout << this->rect.x << ", " << this->rect.y << ", " << this->rect.w << ", " << this->rect.h << std::endl;
+    std::cout << this->col.r << ", " << this->col.g << ", " << this->col.b << std::endl;
 }
 
 // Setters
