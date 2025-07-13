@@ -125,11 +125,14 @@ void Game::move_titleText(){
     //this->title.rect.x += 0.2 * this->td;
 }
 void Game::updateDebugText(){
+    this->logic_textFrametime();
+}
+void Game::logic_textFrametime() {
     std::ostringstream oss;
-    oss << "Frametime: " << this->td << " ms";
+    oss << "Frametime: " << this->td << " ms" << "\n FRAMERATEEEEEEEEEE";
     std::string debugText = oss.str();
     const char* debugTextF = debugText.c_str();
-    this->debug.changeText(debugTextF, this->ext.renderer);
+    this->frametime.changeText(debugTextF, this->ext.renderer);
 }
 
 
@@ -158,7 +161,7 @@ void Game::drawing_snake(){
 }
 void Game::drawing_text(){
     this->title.draw(this->ext.renderer);
-    this->debug.draw(this->ext.renderer);
+    this->frametime.draw(this->ext.renderer);
 }
 void Game::drawing_grid(){
     this->grid.rect.x = this->grid.xO;
@@ -305,8 +308,8 @@ void Game::initClasses(){
     this->title.set_positionCentreX(this->grid.xO, this->grid.xO + this->grid.width_pixels);
 
     // Debug Text
-    this->debug.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
-    this->debug.changeText("Frametime: ", this->ext.renderer);
+    this->frametime.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->frametime.changeText("Frametime: ", this->ext.renderer);
 }
 void Game::initEngine(){
     // SDL Initialise

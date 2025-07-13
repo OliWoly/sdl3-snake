@@ -14,7 +14,9 @@ class Game {
         Apple apple;
 
         Game_Font title;
-        Game_Font debug;
+        Game_Font frametime;
+        Game_Font framerate;
+        Game_Font score;
 
         bool running;
         float td{};
@@ -37,6 +39,7 @@ class Game {
             void logic_text();
                 void move_titleText();
                 void updateDebugText();
+                    void logic_textFrametime();
 
             // Init
             void initEngine();
