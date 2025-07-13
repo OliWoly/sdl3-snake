@@ -73,4 +73,23 @@ void Game_Font::set_text(const char* text){
     this->text = text;
 }
 
+void Game_Font::set_positionCentreX(int min, int max){
+    // Must only be used after this->rect has a valid Width.
+    // Min is the Left most position to centre from.
+    // Max is the Right most position to centre from.
+
+    //int width = max - min;
+    this->rect.x = min + (((max-min)/2) - (this->rect.w/2));
+
+
+}
+
+void Game_Font::set_positionCentreY(int min, int max) {
+    // Must only be used after this->rect has a valid Height
+    // Min is the Up most position to centre from.
+    // Max is the Down most position to centre from.
+
+    this->rect.y = min + (((max-min)/2) - (this->rect.h/2));
+}
+
     

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <optional>
+#include <sstream>
 #include <chrono>
 #include "../include/game.h"
 #include "../include/apple.h"
@@ -7,6 +8,7 @@
 
 constexpr float PHYSICS_REFRESH_RATE = 1000.0/240;
 constexpr float SNAKE_MOVE_RATE = 1000.0/20;
+constexpr float DEBUG_REFRESH_RATE = 1000.0/2;
 
 Game::Game(int w, int h){
 
@@ -53,13 +55,27 @@ void Game::update(){
     }
 }
 void Game::update_fixed(){
+    // Refresh checking counters.
     this->update_counters();
+
+
+    // 20HZ
     if (this->counters.sinceLastSnakeMove > SNAKE_MOVE_RATE){
         this->logic_snake();
+        // Reset counter
+        this->counters.lastSnakeMove = std::chrono::high_resolution_clock::now();
     }
-
+    // 240HZ
     if (this->counters.sinceLastPhysicsCalc > PHYSICS_REFRESH_RATE){
         this->logic_text();
+        // Reset counter
+        this->counters.lastPhysicsCalc = std::chrono::high_resolution_clock::now();
+    }
+    // 2HZ
+    if (this->counters.sinceLastDebugUpdate > DEBUG_REFRESH_RATE) {
+        this->updateDebugText();
+        // Reset counter
+        this->counters.lastDebugUpdate = std::chrono::high_resolution_clock::now();
     }
     
 }
@@ -68,6 +84,7 @@ void Game::update_counters(){
 
     this->counters.sinceLastSnakeMove = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastSnakeMove).count();
     this->counters.sinceLastPhysicsCalc = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastPhysicsCalc).count();
+    this->counters.sinceLastDebugUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->counters.lastDebugUpdate).count();
 }
 
 void Game::logic_snake(){
@@ -79,25 +96,21 @@ void Game::logic_snake(){
         case 0:
             this->snake.head.set_v(this->grid.tile_height);
             this->snake.step_up();
-            this->counters.lastSnakeMove = std::chrono::high_resolution_clock::now();
             break;
 
         case 1:
             this->snake.head.set_v(this->grid.tile_width);
             this->snake.step_left();
-            this->counters.lastSnakeMove = std::chrono::high_resolution_clock::now();
             break;
 
         case 2:
             this->snake.head.set_v(this->grid.tile_height);
             this->snake.step_down();
-            this->counters.lastSnakeMove = std::chrono::high_resolution_clock::now();
             break;
             
         case 3:
             this->snake.head.set_v(this->grid.tile_width);
             this->snake.step_right();
-            this->counters.lastSnakeMove = std::chrono::high_resolution_clock::now();
             break;
 
         default:
@@ -107,14 +120,16 @@ void Game::logic_snake(){
 }
 void Game::logic_text(){
     this->move_titleText();
-    this->updateDebugText();
 }
 void Game::move_titleText(){
-    this->title.rect.x += 0.2 * this->td;
+    //this->title.rect.x += 0.2 * this->td;
 }
 void Game::updateDebugText(){
-    std::string tdStr = std::to_string(this->td);
-    this->debug.changeText(tdStr.c_str(), this->ext.renderer);
+    std::ostringstream oss;
+    oss << "Frametime: " << this->td << " ms";
+    std::string debugText = oss.str();
+    const char* debugTextF = debugText.c_str();
+    this->debug.changeText(debugTextF, this->ext.renderer);
 }
 
 
@@ -262,7 +277,7 @@ void Game::initGrid(float heightRelative, int amountX, int amountY){
 void Game::initClasses(){
     
     // Grid
-    this->initGrid(0.9, 20, 20);
+    this->initGrid(0.5, 7, 7);
     //this->print_gridAttributes();
     
     // Snake
@@ -279,16 +294,19 @@ void Game::initClasses(){
     {
         this->apple.set_positionALT(this->grid.tile_width*4, this->grid.tile_height*4, 0);
     }
-    std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
-    std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
+    //std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
+    //std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
 
 
     // Text
+    // Title
     this->title.init("../recourses/fonts/Daydream.ttf", 24, SDL_Color{255, 255, 255, 255},this->ext.renderer);
     this->title.changeText("TITLE", this->ext.renderer);
+    this->title.set_positionCentreX(this->grid.xO, this->grid.xO + this->grid.width_pixels);
 
+    // Debug Text
     this->debug.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
-    this->debug.changeText("DEBUG", this->ext.renderer);
+    this->debug.changeText("Frametime: ", this->ext.renderer);
 }
 void Game::initEngine(){
     // SDL Initialise

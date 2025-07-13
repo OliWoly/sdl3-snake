@@ -24,4 +24,7 @@ class Game_Font{
 
         // Setters
         void set_text(const char *text);
+        void set_positionCentreX(int min, int max);
+        void set_positionCentreY(int min, int max);
+
 };

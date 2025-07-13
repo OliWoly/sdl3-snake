@@ -35,6 +35,9 @@ class Game_Counters {
 
         std::chrono::high_resolution_clock::time_point lastPhysicsCalc = std::chrono::high_resolution_clock::now();
         float sinceLastPhysicsCalc;
+
+        std::chrono::high_resolution_clock::time_point lastDebugUpdate = std::chrono::high_resolution_clock::now();
+        float sinceLastDebugUpdate;
 };
 
 class Game_External {
