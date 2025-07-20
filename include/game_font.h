@@ -1,12 +1,13 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
+#include "game_constants.h"
 
 class Game_Font{
     public:
         TTF_Font *font;
         SDL_Texture *texture;
-        SDL_FRect rect = {0, 0, 0, 0};
+        SDL_FRect rect = {SCREEN_PADDING_X, SCREEN_PADDING_Y, 0, 0};
         SDL_Color col = {255, 255, 255, 255};
         const char *text = "SAMPLE";
 

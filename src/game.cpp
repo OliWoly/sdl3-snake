@@ -4,11 +4,7 @@
 #include <chrono>
 #include "../include/game.h"
 #include "../include/apple.h"
-
-
-constexpr float PHYSICS_REFRESH_RATE = 1000.0/240;
-constexpr float SNAKE_MOVE_RATE = 1000.0/20;
-constexpr float DEBUG_REFRESH_RATE = 1000.0/2;
+#include "../include/game_constants.h"
 
 Game::Game(int w, int h){
 
@@ -42,6 +38,8 @@ void Game::update(){
         auto start = std::chrono::high_resolution_clock::now();
         this->eventHandler();
         this->update_fixed();
+        this->updateStatisticsText();
+
         this->drawing();
 
 
@@ -67,7 +65,7 @@ void Game::update_fixed(){
     }
     // 240HZ
     if (this->counters.sinceLastPhysicsCalc > PHYSICS_REFRESH_RATE){
-        this->logic_text();
+        this->logic_textTitle();
         // Reset counter
         this->counters.lastPhysicsCalc = std::chrono::high_resolution_clock::now();
     }
@@ -118,7 +116,7 @@ void Game::logic_snake(){
     }
 
 }
-void Game::logic_text(){
+void Game::logic_textTitle(){
     this->move_titleText();
 }
 void Game::move_titleText(){
@@ -126,13 +124,44 @@ void Game::move_titleText(){
 }
 void Game::updateDebugText(){
     this->logic_textFrametime();
+    this->logic_textFramerate();
+}
+void Game::updateStatisticsText() {
+    this->logic_textPosition();
+    this->logic_textScore();
 }
 void Game::logic_textFrametime() {
     std::ostringstream oss;
-    oss << "Frametime: " << this->td << " ms" << "\n FRAMERATEEEEEEEEEE";
+    oss << "Frametime: " << this->td << " ms";
     std::string debugText = oss.str();
     const char* debugTextF = debugText.c_str();
     this->frametime.changeText(debugTextF, this->ext.renderer);
+}
+void Game::logic_textFramerate() {
+    std::ostringstream oss;
+    int framerate = int(this->td * 1000);
+    oss << "FPS: " << framerate;
+    std::string debugText = oss.str();
+    const char* debugTextF = debugText.c_str();
+    this->framerate.changeText(debugTextF, this->ext.renderer);
+}
+void Game::logic_textPosition() {
+    std::ostringstream oss;
+    int framerate = int(this->td * 1000);
+    oss << "X: " << this->snake.head.pos.x << " Y: " << this->snake.head.pos.y;
+    std::string debugText = oss.str();
+    const char* debugTextF = debugText.c_str();
+    this->snakePosition.changeText(debugTextF, this->ext.renderer);
+    this->snakePosition.rect.x = this->ext.screenWidth - this->snakePosition.rect.w - SCREEN_PADDING_X;
+}
+void Game::logic_textScore() {
+    std::ostringstream oss;
+    int framerate = int(this->td * 1000);
+    oss << "Score: " << this->snake.body.size();
+    std::string debugText = oss.str();
+    const char* debugTextF = debugText.c_str();
+    this->score.changeText(debugTextF, this->ext.renderer);
+    this->score.rect.x = this->ext.screenWidth - this->score.rect.w - SCREEN_PADDING_X;
 }
 
 
@@ -146,7 +175,7 @@ void Game::drawing(){
 
     this->drawing_grid();
     this->drawing_snake();
-    //this->drawing_apple();
+    this->drawing_apple();
     this->drawing_text();
 
 
@@ -162,6 +191,9 @@ void Game::drawing_snake(){
 void Game::drawing_text(){
     this->title.draw(this->ext.renderer);
     this->frametime.draw(this->ext.renderer);
+    this->framerate.draw(this->ext.renderer);
+    this->snakePosition.draw(this->ext.renderer);
+    this->score.draw(this->ext.renderer);
 }
 void Game::drawing_grid(){
     this->grid.rect.x = this->grid.xO;
@@ -181,7 +213,7 @@ void Game::drawing_grid(){
     // j is x
     // i is y
     for (int j=0; j < this->grid.width_tiles; j++){
-        for (int i=0; i < this->grid.width_tiles; i++){
+        for (int i=0; i < this->grid.height_tiles; i++){
             if ((i+j)%2 == 1){
                 this->grid.rect.x = this->grid.xO + j * this->grid.tile_width;
                 this->grid.rect.y = this->grid.yO + i * this->grid.tile_height;
@@ -280,7 +312,7 @@ void Game::initGrid(float heightRelative, int amountX, int amountY){
 void Game::initClasses(){
     
     // Grid
-    this->initGrid(0.5, 7, 7);
+    this->initGrid(0.8, 40, 25);
     //this->print_gridAttributes();
     
     // Snake
@@ -297,19 +329,25 @@ void Game::initClasses(){
     {
         this->apple.set_positionALT(this->grid.tile_width*4, this->grid.tile_height*4, 0);
     }
-    //std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
-    //std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
+    std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
+    std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
 
 
     // Text
     // Title
-    this->title.init("../recourses/fonts/Daydream.ttf", 24, SDL_Color{255, 255, 255, 255},this->ext.renderer);
-    this->title.changeText("TITLE", this->ext.renderer);
+    this->title.init("../recourses/fonts/Daydream.ttf",
+                    24,
+                    SDL_Color{255, 255, 255, 255},
+                    this->ext.renderer);
+    this->title.changeText("SNAKE", this->ext.renderer);
     this->title.set_positionCentreX(this->grid.xO, this->grid.xO + this->grid.width_pixels);
 
     // Debug Text
-    this->frametime.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
-    this->frametime.changeText("Frametime: ", this->ext.renderer);
+    // Y Position is handled by lowest variable.
+    // X Position is handled in the text logic function.
+    this->initDebugText();
+    this->initStatisticsText();
+
 }
 void Game::initEngine(){
     // SDL Initialise
@@ -353,6 +391,37 @@ void Game::cleanup(){
     
     SDL_Quit();
     TTF_Quit();
+}
+void Game::initDebugText() {
+    // lowest will set the current highest (confusing i know) available coordinate i pixels
+    // to be drawn to not interfere with more text.
+    // avoids further unneeded maths.
+    // updates every tim e anew text box is added in debug.
+    float lowest = 0;   // initial vertical position.
+
+    this->frametime.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->frametime.changeText("Frametime: ", this->ext.renderer);
+    lowest = this->frametime.rect.y + this->frametime.rect.h;
+
+    this->framerate.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->framerate.rect.y = lowest;
+    lowest += this->framerate.rect.h;
+}
+void Game::initStatisticsText() {
+    float lowest = 0;
+
+    this->snakePosition.init("../recourses/fonts/DayDream.ttf",
+                            18,
+                            SDL_Color{200, 40, 180, 255},
+                            this->ext.renderer);
+    lowest = this->snakePosition.rect.y + this->snakePosition.rect.h;
+
+    this->score.init("../recourses/fonts/Daydream.ttf",
+                    18,
+                    SDL_Color{200, 40, 180, 255},
+                    this->ext.renderer);
+    this->score.rect.y = lowest;
+    lowest += this->score.rect.h;
 }
 
 
