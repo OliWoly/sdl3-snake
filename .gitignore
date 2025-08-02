@@ -9,3 +9,4 @@ Makefile
 .idea/
 .vscode/a
 .DS_Store
+.cache/
