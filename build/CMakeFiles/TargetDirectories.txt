@@ -1,3 +1,0 @@
-/home/oli/Documents/code/sdl3-snake/build/CMakeFiles/sdl3-snake.dir
-/home/oli/Documents/code/sdl3-snake/build/CMakeFiles/edit_cache.dir
-/home/oli/Documents/code/sdl3-snake/build/CMakeFiles/rebuild_cache.dir
