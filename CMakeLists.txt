@@ -3,7 +3,7 @@ project(sdl3-snake VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Detect platform
+# PLATFROM DETECTION
 if(APPLE)
     message(STATUS "Building on macOS")
     set(CMAKE_PREFIX_PATH "/opt/homebrew")
