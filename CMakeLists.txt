@@ -27,7 +27,9 @@ endif()
 
 # Add your sources
 file(GLOB_RECURSE SRC_FILES "src/*.cpp")
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+add_executable(${PROJECT_NAME} ${SRC_FILES}
+        include/collision.cpp
+        include/collision.h)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         include

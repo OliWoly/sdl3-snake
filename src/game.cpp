@@ -3,6 +3,8 @@
 #include <sstream>
 #include <chrono>
 #include "../include/game.h"
+
+#include "../include/collision.h"
 #include "../include/apple.h"
 #include "../include/game_constants.h"
 
@@ -33,6 +35,11 @@ Game::Game(int w, int h){
 };
 
 // Class Methods
+
+
+
+
+// Update Logic Methods
 void Game::update(){
     while (this->running){
         auto start = std::chrono::high_resolution_clock::now();
@@ -65,11 +72,12 @@ void Game::update_fixed(){
     }
     // 240HZ
     if (this->counters.sinceLastPhysicsCalc > PHYSICS_REFRESH_RATE){
-        this->logic_textTitle();
+        this->logic_collision();
         // Reset counter
         this->counters.lastPhysicsCalc = std::chrono::high_resolution_clock::now();
+
     }
-    // 2HZ
+    // 10HZ
     if (this->counters.sinceLastDebugUpdate > DEBUG_REFRESH_RATE) {
         this->updateDebugText();
         // Reset counter
@@ -164,10 +172,19 @@ void Game::logic_textScore() {
     this->score.rect.x = this->ext.screenWidth - this->score.rect.w - SCREEN_PADDING_X;
 }
 
+void Game::logic_collision(){
+    // Apple collision
+    bool collidedApple = Collision::collide(this->snake.head, this->apple);
+    if (collidedApple){
+        this->apple.respawn(this->chooseRandomTileLocation());
+    }
+}
 
 
 
 
+
+// Drawing Methods
 void Game::drawing(){
     SDL_SetRenderDrawColor(this->ext.renderer, 0, 0, 0, 255);
     SDL_RenderClear(this->ext.renderer);
@@ -232,6 +249,7 @@ void Game::drawing_apple(){
 
 
 
+// Handler Methods
 void Game::eventHandler(){
     while (SDL_PollEvent(&this->event)) {
         this->closeWithOS();
@@ -291,6 +309,7 @@ void Game::closeWithOS(){
 
 
 
+// Initialisation Methods
 void Game::initGrid(float heightRelative, int amountX, int amountY){
     this->grid.heightRelative = heightRelative;
     this->grid.width_tiles = amountX;
@@ -329,12 +348,10 @@ void Game::initClasses(){
     {
         this->apple.set_colour(APPLE_COLOUR);
 
-        this->apple.set_positionALT(this->grid.tile_width*4, this->grid.tile_height*4, 0);
+        this->apple.respawn(this->chooseRandomTileLocation());
         this->apple.w = this->grid.tile_width;
         this->apple.h = this->grid.tile_height;
     }
-    std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
-    std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
 
 
     // Text
@@ -397,10 +414,10 @@ void Game::cleanup(){
     TTF_Quit();
 }
 void Game::initDebugText() {
-    // lowest will set the current highest (confusing I know) available coordinate i pixels
+    // lowest will set the current highest (confusing I know) available coordinate in pixels
     // to be drawn to not interfere with more text.
     // avoids further unneeded maths.
-    // updates every tim e anew text box is added in debug.
+    // updates every time a new text box is added in debug.
     float lowest = 0;   // initial vertical position.
 
     this->frametime.init("../assets/fonts/Helvetica.ttf", 14, DEBUG_TEXT_COLOUR, this->ext.renderer);
@@ -412,6 +429,7 @@ void Game::initDebugText() {
     lowest += this->framerate.rect.h;
 }
 void Game::initStatisticsText() {
+    // Read more about the "lowest" system in initDebugText().
     float lowest = 0;
 
     this->snakePosition.init("../assets/fonts/Daydream.ttf",
@@ -427,6 +445,19 @@ void Game::initStatisticsText() {
     this->score.rect.y = lowest;
     lowest += this->score.rect.h;
 }
+
+
+
+
+
+// Miscellaneous Methods
+Position Game::chooseRandomTileLocation(){
+    float x = this->grid.xO + (rand() % this->grid.width_tiles * this->grid.tile_width);
+    float y = this->grid.yO + (rand() % this->grid.height_tiles * this->grid.tile_height);
+
+    return Position{x, y, 0};
+}
+
 
 
 

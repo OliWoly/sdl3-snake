@@ -49,6 +49,9 @@ class Game {
                     void logic_textPosition();
                     void logic_textScore();
 
+            void logic_collision();
+            void collide(Entity e1, Entity e2);
+
             // Init
             void initEngine();
             void initClasses();
@@ -69,6 +72,9 @@ class Game {
             void drawing_text();
             void drawing_grid();
             void drawing_apple();
+
+            // Miscellaneous
+            Position chooseRandomTileLocation();
 
         // Getters
         void print_gridAttributes();

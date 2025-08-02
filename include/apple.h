@@ -9,5 +9,6 @@ class Apple : public Entity{
     
     public:
         explicit Apple();
+        void respawn(Position position);
 };
 
