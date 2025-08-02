@@ -51,6 +51,7 @@ class Game {
 
             void logic_collision();
             void collide(Entity e1, Entity e2);
+            void eat();
 
             // Init
             void initEngine();
@@ -75,6 +76,7 @@ class Game {
 
             // Miscellaneous
             Position chooseRandomTileLocation();
+            void gameOver();
 
         // Getters
         void print_gridAttributes();

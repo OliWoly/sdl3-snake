@@ -13,6 +13,7 @@ constexpr float SCREEN_PADDING_Y = 5;
 constexpr float SCREEN_PADDING_X = 5;
 
 // Colours
+constexpr auto WHITE = Colour{255, 255, 255, 255};
     // Game Objects
     constexpr auto SNAKE_HEAD_COLOUR = Colour{64, 209, 90, 255};
     constexpr auto SNAKE_BODY_COLOUR = Colour{130, 209, 66, 255};

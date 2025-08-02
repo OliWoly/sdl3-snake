@@ -176,8 +176,30 @@ void Game::logic_collision(){
     // Apple collision
     bool collidedApple = Collision::collide(this->snake.head, this->apple);
     if (collidedApple){
-        this->apple.respawn(this->chooseRandomTileLocation());
+        this->eat();
     }
+
+    // Body Collision
+    for (int i = 0; i < this->snake.body.size(); i++){
+        if (Collision::collide(this->snake.head, this->snake.body[i])){
+            this->gameOver();
+        }
+    }
+
+    // Border Collisions
+    if (Collision::collide(this->snake.head, this->grid.borderN) ||
+        Collision::collide(this->snake.head, this->grid.borderS) ||
+        Collision::collide(this->snake.head, this->grid.borderW) ||
+        Collision::collide(this->snake.head, this->grid.borderE)) {
+            this->gameOver();
+    }
+}
+
+void Game::eat(){
+    // PLAY SOUND
+    // CHANGE SNAKE COLOUR
+    this->apple.respawn(this->chooseRandomTileLocation());
+    this->snake.extend();
 }
 
 
@@ -238,6 +260,14 @@ void Game::drawing_grid(){
                 SDL_RenderFillRect(this->ext.renderer, &this->grid.rect);
             }
         }
+    }
+
+    // Draw Borders
+    {
+        this->grid.borderN.draw(this->ext.renderer);
+        this->grid.borderW.draw(this->ext.renderer);
+        this->grid.borderE.draw(this->ext.renderer);
+        this->grid.borderS.draw(this->ext.renderer);
     }
 }
 void Game::drawing_apple(){
@@ -328,6 +358,25 @@ void Game::initGrid(float heightRelative, int amountX, int amountY){
 
     this->grid.xO = (this->ext.screenWidth/2) - (this->grid.width_pixels/2);
     this->grid.yO = (this->ext.screenHeight/2) - (this->grid.height_pixels/2);
+
+
+    // Borders
+    this->grid.borderN.set_positionALT(this->grid.xO, this->grid.yO-2, 0);
+    this->grid.borderN.set_dimensions(this->grid.width_pixels, 1, 0);
+    this->grid.borderN.set_colour(WHITE);
+
+
+    this->grid.borderW.set_positionALT(this->grid.xO-2, this->grid.yO, 0);
+    this->grid.borderW.set_dimensions(1, this->grid.height_pixels, 0);
+    this->grid.borderW.set_colour(WHITE);
+
+    this->grid.borderS.set_positionALT(this->grid.xO, this->grid.yO+2+this->grid.height_pixels, 0);
+    this->grid.borderS.set_dimensions(this->grid.width_pixels, 1, 0);
+    this->grid.borderS.set_colour(WHITE);
+
+    this->grid.borderE.set_positionALT(this->grid.xO+2+this->grid.width_pixels, this->grid.yO, 0);
+    this->grid.borderE.set_dimensions(1, this->grid.height_pixels, 0);
+    this->grid.borderE.set_colour(WHITE);
 }
 void Game::initClasses(){
     
@@ -457,7 +506,9 @@ Position Game::chooseRandomTileLocation(){
 
     return Position{x, y, 0};
 }
-
+void Game::gameOver(){
+    this->initClasses();
+}
 
 
 

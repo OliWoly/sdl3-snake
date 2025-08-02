@@ -3,6 +3,8 @@
 #include "colour.h"
 #include <chrono>
 
+#include "entity.h"
+
 class Game_Grid{
     public:
         int width_tiles;
@@ -26,6 +28,12 @@ class Game_Grid{
         Colour secondaryCol{35, 35, 35, 255};
 
         SDL_FRect rect;
+
+
+        Entity borderN;
+        Entity borderE;
+        Entity borderS;
+        Entity borderW;
 };
 
 class Game_Counters {
