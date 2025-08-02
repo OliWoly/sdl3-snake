@@ -1,6 +1,6 @@
 #pragma once
 #include <optional>
-#include <SDL3/SDl.h>
+#include <SDL3/SDL.h>
 
 #include "position.h"
 #include "colour.h"

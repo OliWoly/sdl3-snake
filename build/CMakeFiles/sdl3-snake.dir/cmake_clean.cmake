@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/sdl3-snake.dir/link.d"
   "CMakeFiles/sdl3-snake.dir/src/apple.cpp.o"
   "CMakeFiles/sdl3-snake.dir/src/apple.cpp.o.d"
   "CMakeFiles/sdl3-snake.dir/src/entity.cpp.o"

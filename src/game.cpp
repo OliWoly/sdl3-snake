@@ -335,7 +335,7 @@ void Game::initClasses(){
 
     // Text
     // Title
-    this->title.init("../recourses/fonts/Daydream.ttf",
+    this->title.init("../assets/fonts/Daydream.ttf",
                     24,
                     SDL_Color{255, 255, 255, 255},
                     this->ext.renderer);
@@ -399,24 +399,24 @@ void Game::initDebugText() {
     // updates every tim e anew text box is added in debug.
     float lowest = 0;   // initial vertical position.
 
-    this->frametime.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->frametime.init("../assets/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
     this->frametime.changeText("Frametime: ", this->ext.renderer);
     lowest = this->frametime.rect.y + this->frametime.rect.h;
 
-    this->framerate.init("../recourses/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->framerate.init("../assets/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
     this->framerate.rect.y = lowest;
     lowest += this->framerate.rect.h;
 }
 void Game::initStatisticsText() {
     float lowest = 0;
 
-    this->snakePosition.init("../recourses/fonts/DayDream.ttf",
+    this->snakePosition.init("../assets/fonts/Daydream.ttf",
                             18,
                             SDL_Color{200, 40, 180, 255},
                             this->ext.renderer);
     lowest = this->snakePosition.rect.y + this->snakePosition.rect.h;
 
-    this->score.init("../recourses/fonts/Daydream.ttf",
+    this->score.init("../assets/fonts/Daydream.ttf",
                     18,
                     SDL_Color{200, 40, 180, 255},
                     this->ext.renderer);
