@@ -2,10 +2,13 @@
 
 #include "player.h"
 
+#include "game_constants.h"
+
 Player::Player()
     : Entity()
     {
-        this->col={255, 0, 0, 255};
+        this->col={64, 209, 90, 255};
+        this->set_colour(SNAKE_HEAD_COLOUR);
 };
 
 void Player::set_name(std::string name){

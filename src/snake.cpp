@@ -2,6 +2,7 @@
 
 #include "snake.h"
 #include "entity.h"
+#include "game_constants.h"
 
 Snake::Snake(){
     
@@ -10,7 +11,7 @@ Snake::Snake(){
 void Snake::extend(){
     Entity segment;
     segment.set_dimensions(this->head.w, this->head.h, 1);
-    segment.set_colourALT(255, 255, 100,std::nullopt);
+    segment.set_colour(SNAKE_BODY_COLOUR);
     //segment.set_position(this->head.pos);
     this->body.push_back(segment);
 }

@@ -224,6 +224,7 @@ void Game::drawing_grid(){
     }
 }
 void Game::drawing_apple(){
+    //std::cout << this->apple.pos.x << " " << this->apple.pos.y << std::endl;
     this->apple.draw(this->ext.renderer);
 }
 
@@ -321,13 +322,16 @@ void Game::initClasses(){
     {
         this->snake.head.set_positionALT(this->grid.xO, this->grid.yO, std::nullopt);
         this->snake.head.set_dimensions(this->grid.tile_width, this->grid.tile_height, 1);
-        this->snake.head.set_colourALT(std::nullopt, 0, 0,std::nullopt);
     }
 
     // Apple
     this->apple = Apple();
     {
+        this->apple.set_colour(APPLE_COLOUR);
+
         this->apple.set_positionALT(this->grid.tile_width*4, this->grid.tile_height*4, 0);
+        this->apple.w = this->grid.tile_width;
+        this->apple.h = this->grid.tile_height;
     }
     std::cout << this->apple.pos.x << ", " << this->apple.pos.y << std::endl;
     std::cout << this->apple.col.r << ", " << this->apple.col.g << ", " << this->apple.col.b << std::endl;
@@ -337,7 +341,7 @@ void Game::initClasses(){
     // Title
     this->title.init("../assets/fonts/Daydream.ttf",
                     24,
-                    SDL_Color{255, 255, 255, 255},
+                    TITLE_TEXT_COLOUR,
                     this->ext.renderer);
     this->title.changeText("SNAKE", this->ext.renderer);
     this->title.set_positionCentreX(this->grid.xO, this->grid.xO + this->grid.width_pixels);
@@ -393,17 +397,17 @@ void Game::cleanup(){
     TTF_Quit();
 }
 void Game::initDebugText() {
-    // lowest will set the current highest (confusing i know) available coordinate i pixels
+    // lowest will set the current highest (confusing I know) available coordinate i pixels
     // to be drawn to not interfere with more text.
     // avoids further unneeded maths.
     // updates every tim e anew text box is added in debug.
     float lowest = 0;   // initial vertical position.
 
-    this->frametime.init("../assets/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->frametime.init("../assets/fonts/Helvetica.ttf", 14, DEBUG_TEXT_COLOUR, this->ext.renderer);
     this->frametime.changeText("Frametime: ", this->ext.renderer);
     lowest = this->frametime.rect.y + this->frametime.rect.h;
 
-    this->framerate.init("../assets/fonts/Helvetica.ttf", 14, SDL_Color{0, 255, 0, 255},this->ext.renderer);
+    this->framerate.init("../assets/fonts/Helvetica.ttf", 14, DEBUG_TEXT_COLOUR, this->ext.renderer);
     this->framerate.rect.y = lowest;
     lowest += this->framerate.rect.h;
 }
@@ -412,13 +416,13 @@ void Game::initStatisticsText() {
 
     this->snakePosition.init("../assets/fonts/Daydream.ttf",
                             18,
-                            SDL_Color{200, 40, 180, 255},
+                            STATISTICS_TEXT_COLOUR,
                             this->ext.renderer);
     lowest = this->snakePosition.rect.y + this->snakePosition.rect.h;
 
     this->score.init("../assets/fonts/Daydream.ttf",
                     18,
-                    SDL_Color{200, 40, 180, 255},
+                    STATISTICS_TEXT_COLOUR,
                     this->ext.renderer);
     this->score.rect.y = lowest;
     lowest += this->score.rect.h;
