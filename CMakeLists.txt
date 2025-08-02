@@ -7,22 +7,27 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(APPLE)
     message(STATUS "Building on macOS")
     set(CMAKE_PREFIX_PATH "/opt/homebrew")
-elseif(UNIX)
+elseif(LINUX)
     message(STATUS "Building on Linux")
 endif()
 
-# Try find_package first
+
 find_package(SDL3 QUIET)
 find_package(SDL3_ttf QUIET)
 
 # Fallback to pkg-config if CMake packages not found
 if(NOT SDL3_FOUND)
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(SDL3 REQUIRED sdl3)
+    if(LINUX)
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(SDL3 REQUIRED sdl3)
+    endif()
 endif()
 
 if(NOT SDL3_TTF_FOUND)
-    pkg_check_modules(SDL3_TTF REQUIRED sdl3-ttf)
+    if(LINUX)
+        message(STATUS "ONLY LINUX")
+        pkg_check_modules(SDL3_TTF REQUIRED sdl3-ttf)
+    endif()
 endif()
 
 # Add your sources
@@ -35,7 +40,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         ${SDL3_TTF_INCLUDE_DIRS}
 )
 
-target_link_libraries(${PROJECT_NAME}
-        ${SDL3_LIBRARIES}
-        ${SDL3_TTF_LIBRARIES}
-)
+#target_link_libraries(${PROJECT_NAME}
+#        ${SDL3_LIBRARIES}
+#        ${SDL3_TTF_LIBRARIES}
+#)
+
+target_link_libraries(sdl3-snake SDL3::SDL3 SDL3_ttf::SDL3_ttf)
