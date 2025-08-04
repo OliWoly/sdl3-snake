@@ -7,14 +7,14 @@
 
 class Entity{
     public:
-        Position pos;
+        Position pos = {0, 0, 0};
         Colour col;
         
-        float h;        // Height
-        float w;        // Width
-        float d;        // Depth
-        float v;        // Velocity
-        float acc;      // Acceleration
+        float h = 0;        // Height
+        float w = 0;        // Width
+        float d = 0;        // Depth
+        float v = 0;        // Velocity
+        float acc = 0;      // Acceleration
 
         SDL_FRect rect;
 
@@ -24,6 +24,7 @@ class Entity{
 
         explicit Entity();
 
+        void updateRect();
         void draw(SDL_Renderer *renderer);
 
         void set_position(Position position);

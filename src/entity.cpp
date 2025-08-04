@@ -7,11 +7,17 @@ Entity::Entity(){
 };
 
 // Class Methods
-void Entity::draw(SDL_Renderer *renderer){
+
+// Update the "rect" object within to match local position and size variables.
+void Entity::updateRect(){
     this->rect.x = this->pos.x;
     this->rect.y = this->pos.y;
     this->rect.w = this->w;
     this->rect.h = this->h;
+}
+
+void Entity::draw(SDL_Renderer *renderer){
+    this->updateRect();
     SDL_SetRenderDrawColor(renderer, this->col.r, this->col.g, this->col.b, this->col.a);
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -24,6 +30,7 @@ void Entity::draw(SDL_Renderer *renderer){
 
 void Entity::set_position(Position position){
     this->pos = position;
+    this->updateRect();
 }
 
 void Entity::set_positionALT(std::optional<float> x, std::optional<float> y, std::optional<float> z){
@@ -38,6 +45,7 @@ void Entity::set_positionALT(std::optional<float> x, std::optional<float> y, std
     if (z.has_value()){
         this->pos.z = z.value();
     }
+    this->updateRect();
 }
 
 void Entity::set_colour(Colour colour){
@@ -67,6 +75,7 @@ void Entity::set_dimensions(float w, float h, float d){
     this->h = h;
     // If unsure keep depth at 1.
     this->d = d;
+    this->updateRect();
 }
 
 void Entity::set_movementAttributes(float v, float acc){

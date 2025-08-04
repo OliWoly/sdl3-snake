@@ -187,18 +187,21 @@ void Game::logic_collision(){
     }
 
     // Border Collisions
+    this->logic_collisionBorders();
+}
+void Game::logic_collisionBorders(){
     if (Collision::collide(this->snake.head, this->grid.borderN) ||
         Collision::collide(this->snake.head, this->grid.borderS) ||
         Collision::collide(this->snake.head, this->grid.borderW) ||
         Collision::collide(this->snake.head, this->grid.borderE)) {
             this->gameOver();
-    }
+        }
 }
 
 void Game::eat(){
     // PLAY SOUND
     // CHANGE SNAKE COLOUR
-    this->apple.respawn(this->chooseRandomTileLocation());
+    this->respawnAppleValid();
     this->snake.extend();
 }
 
@@ -262,17 +265,17 @@ void Game::drawing_grid(){
         }
     }
 
-    // Draw Borders
-    {
-        this->grid.borderN.draw(this->ext.renderer);
-        this->grid.borderW.draw(this->ext.renderer);
-        this->grid.borderE.draw(this->ext.renderer);
-        this->grid.borderS.draw(this->ext.renderer);
-    }
+    //this->draw_gridBorders();
 }
 void Game::drawing_apple(){
     //std::cout << this->apple.pos.x << " " << this->apple.pos.y << std::endl;
     this->apple.draw(this->ext.renderer);
+}
+void Game::draw_gridBorders(){
+    this->grid.borderN.draw(this->ext.renderer);
+    this->grid.borderW.draw(this->ext.renderer);
+    this->grid.borderE.draw(this->ext.renderer);
+    this->grid.borderS.draw(this->ext.renderer);
 }
 
 
@@ -381,7 +384,7 @@ void Game::initGrid(float heightRelative, int amountX, int amountY){
 void Game::initClasses(){
     
     // Grid
-    this->initGrid(0.8, 40, 25);
+    this->initGrid(0.8, 15, 15);
     //this->print_gridAttributes();
     
     // Snake
@@ -508,6 +511,23 @@ Position Game::chooseRandomTileLocation(){
 }
 void Game::gameOver(){
     this->initClasses();
+}
+
+void Game::respawnAppleValid(){
+    bool valid = false;
+    while (!valid){
+        valid = true;
+        this->apple.respawn(this->chooseRandomTileLocation());
+
+        // Checks
+        for (int i=0; i < this->snake.body.size(); i++){
+            if (Collision::collide(this->apple, this->snake.body[i])){
+                valid = false;
+            }
+        }
+    } // while
+
+
 }
 
 

@@ -50,6 +50,7 @@ class Game {
                     void logic_textScore();
 
             void logic_collision();
+            void logic_collisionBorders();
             void collide(Entity e1, Entity e2);
             void eat();
 
@@ -73,10 +74,12 @@ class Game {
             void drawing_text();
             void drawing_grid();
             void drawing_apple();
+            void draw_gridBorders();
 
             // Miscellaneous
             Position chooseRandomTileLocation();
             void gameOver();
+            void respawnAppleValid();
 
         // Getters
         void print_gridAttributes();
