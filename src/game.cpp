@@ -147,7 +147,7 @@ void Game::logic_textFrametime() {
 }
 void Game::logic_textFramerate() {
     std::ostringstream oss;
-    int framerate = int(this->td * 1000);
+    float framerate = 1000 / this->td;
     oss << "FPS: " << framerate;
     std::string debugText = oss.str();
     const char* debugTextF = debugText.c_str();
